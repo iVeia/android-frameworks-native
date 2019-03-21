@@ -319,9 +319,10 @@ Vector< sp<EventThread::Connection> > EventThread::waitForEvent(
                 // generate fake events when necessary.
                 bool softwareSync = mUseSoftwareVSync;
                 nsecs_t timeout = softwareSync ? ms2ns(16) : ms2ns(1000);
+                timeout = ms2ns(32);
                 if (mCondition.waitRelative(mLock, timeout) == TIMED_OUT) {
                     if (!softwareSync) {
-                        ALOGW("Timed out waiting for hw vsync; faking it");
+                        //ALOGW("Timed out waiting for hw vsync; faking it");
                     }
                     // FIXME: how do we decide which display id the fake
                     // vsync came from ?
